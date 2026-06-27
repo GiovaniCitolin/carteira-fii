@@ -211,3 +211,132 @@ padding:15px;
 }
 
 }
+/* ---------- PESQUISA ---------- */
+
+.search-box{
+    margin-bottom:18px;
+}
+
+.search-box input{
+    width:100%;
+    padding:15px 18px;
+    border:none;
+    border-radius:18px;
+    background:#fff;
+    font-size:16px;
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+}
+
+/* ---------- CARD DOS FUNDOS ---------- */
+
+.fundo-card{
+
+    background:#fff;
+
+    border-radius:22px;
+
+    padding:18px;
+
+    margin-bottom:16px;
+
+    box-shadow:0 8px 25px rgba(0,0,0,.08);
+
+    border-left:6px solid #2563eb;
+
+}
+
+.fundo-topo{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:15px;
+
+}
+
+.fundo-nome{
+
+    font-size:22px;
+
+    font-weight:bold;
+
+    color:#0f172a;
+
+}
+
+.menu{
+
+    font-size:26px;
+
+    cursor:pointer;
+
+    color:#64748b;
+
+}
+
+.info-grid{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:12px;
+
+    margin-top:10px;
+
+}
+
+.info{
+
+    background:#f8fafc;
+
+    padding:12px;
+
+    border-radius:15px;
+
+}
+
+.info small{
+
+    display:block;
+
+    color:#64748b;
+
+    margin-bottom:4px;
+
+}
+
+.info b{
+
+    font-size:18px;
+
+}
+
+.acoes{
+
+    display:flex;
+
+    gap:10px;
+
+    margin-top:18px;
+
+}
+
+.btn-edit{
+
+    flex:1;
+
+    background:#2563eb;
+
+}
+
+.btn-delete{
+
+    flex:1;
+
+    background:#dc2626;
+
+}
