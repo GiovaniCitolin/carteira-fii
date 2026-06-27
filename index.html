@@ -1,54 +1,156 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
 <title>Carteira FII</title>
+
 <link rel="stylesheet" href="style.css">
+
 <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#0f172a">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black">
-<meta name="apple-mobile-web-app-title" content="Carteira FII">
-<link rel="apple-touch-icon" href="icon-192.png">
+
+<meta name="theme-color" content="#f4f6fb">
+
 </head>
+
 <body>
+
+<header class="topo">
+
+    <h1>Carteira FII</h1>
+
+    <p>Controle dos seus investimentos</p>
+
+</header>
+
 <div class="container">
-<h1>💰 Carteira FII</h1>
 
-<div class="card">
-<h2>Novo Aporte</h2>
-<input type="text" id="fundo" placeholder="Fundo (MXRF11)">
-<input type="number" id="cotas" placeholder="Quantidade de cotas">
-<input type="number" step="0.01" id="valor" placeholder="Valor da cota">
-<input type="date" id="data">
-<button onclick="salvarAporte()">Salvar Aporte</button>
+<div class="dashboard">
+
+    <div class="resumo">
+
+        <span>Total Investido</span>
+
+        <h2 id="totalInvestido">
+            R$ 0,00
+        </h2>
+
+    </div>
+
+    <div class="linha"></div>
+
+    <div class="resumo">
+
+        <span>Dividendos Recebidos</span>
+
+        <h2 id="totalRendimentos">
+            R$ 0,00
+        </h2>
+
+    </div>
+
 </div>
 
 <div class="card">
-<h2>Rendimento Mensal</h2>
-<input type="text" id="fundoRendimento" placeholder="Fundo">
-<input type="month" id="mes">
-<input type="number" step="0.01" id="rendimento" placeholder="Valor recebido">
-<button onclick="salvarRendimento()">Salvar Rendimento</button>
-</div>
 
-<div class="card resumo">
-<h3 id="totalInvestido">Investido: R$ 0,00</h3>
-<h3 id="totalRendimentos">Rendimentos: R$ 0,00</h3>
+<h3>Novo Aporte</h3>
+
+<input
+id="fundo"
+type="text"
+placeholder="Ticker (MXRF11)">
+
+<input
+id="cotas"
+type="number"
+placeholder="Quantidade">
+
+<input
+id="valor"
+type="number"
+step="0.01"
+placeholder="Preço da Cota">
+
+<input
+id="data"
+type="date">
+
+<button onclick="salvarAporte()">
+
+Salvar Aporte
+
+</button>
+
 </div>
 
 <div class="card">
-<h2>Fundos Cadastrados</h2>
+
+<h3>Novo Rendimento</h3>
+
+<input
+id="fundoRendimento"
+type="text"
+placeholder="Ticker">
+
+<input
+id="mes"
+type="month">
+
+<input
+id="rendimento"
+type="number"
+step="0.01"
+placeholder="Valor recebido">
+
+<button onclick="salvarRendimento()">
+
+Salvar Rendimento
+
+</button>
+
+</div>
+
+<div class="card">
+
+<h3>Fundos Cadastrados</h3>
+
 <div id="listaFundos"></div>
+
 </div>
 
-<button onclick="location.href='historico.html'" class="historico-btn">📋 Abrir Histórico</button>
+<div class="card">
+
+<h3>Rendimentos</h3>
+
+<div id="listaRendimentos"></div>
+
+</div>
+
+<button
+class="historico"
+onclick="location.href='historico.html'">
+
+Ver Histórico
+
+</button>
+
 </div>
 
 <script src="app.js"></script>
+
 <script>
+
 carregarListaFundos();
+
+carregarListaRendimentos();
+
+atualizarResumo();
+
 </script>
+
 </body>
+
 </html>
