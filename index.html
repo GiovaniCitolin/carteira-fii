@@ -58,10 +58,8 @@
 
 <h3>Novo Aporte</h3>
 
-<input
-id="fundo"
-type="text"
-placeholder="Ticker (MXRF11)">
+<select id="fundo"></select>
+<input id="novoFundo" type="text" placeholder="Novo ticker" style="display:none;">
 
 <input
 id="cotas"
@@ -90,10 +88,8 @@ Salvar Aporte
 
 <h3>Novo Rendimento</h3>
 
-<input
-id="fundoRendimento"
-type="text"
-placeholder="Ticker">
+<select id="fundoRendimento"></select>
+<input id="novoFundoRendimento" type="text" placeholder="Novo ticker" style="display:none;">
 
 <input
 id="mes"
@@ -152,6 +148,7 @@ Ver Histórico
 
 <script>
 
+inicializarFundos();
 carregarListaFundos();
 
 carregarListaRendimentos();

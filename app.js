@@ -1,3 +1,27 @@
+
+let fundosCadastrados=JSON.parse(localStorage.getItem("fundosCadastrados"))||[];
+
+function preencherSelect(id){
+ const s=document.getElementById(id);
+ if(!s) return;
+ s.innerHTML='<option value="">Selecione...</option>';
+ fundosCadastrados.sort().forEach(f=>{
+   s.innerHTML+=`<option value="${f}">${f}</option>`;
+ });
+ s.innerHTML+='<option value="__NOVO__">➕ Novo FII...</option>';
+ s.onchange=function(){
+   const campo=document.getElementById(id==="fundo"?"novoFundo":"novoFundoRendimento");
+   campo.style.display=this.value==="__NOVO__"?"block":"none";
+ };
+}
+function inicializarFundos(){
+ aportes.forEach(a=>{
+   if(!fundosCadastrados.includes(a.fundo)) fundosCadastrados.push(a.fundo);
+ });
+ localStorage.setItem("fundosCadastrados",JSON.stringify(fundosCadastrados));
+ preencherSelect("fundo");
+ preencherSelect("fundoRendimento");
+}
 let aportes = JSON.parse(localStorage.getItem("aportes")) || [];
 let rendimentos = JSON.parse(localStorage.getItem("rendimentos")) || [];
 
@@ -7,8 +31,9 @@ let rendimentos = JSON.parse(localStorage.getItem("rendimentos")) || [];
 
 function salvarAporte(){
 
-    const fundo =
-    document.getElementById("fundo").value.toUpperCase();
+    let fundo=document.getElementById("fundo").value;
+if(fundo==="__NOVO__"){fundo=document.getElementById("novoFundo").value.toUpperCase();}
+else{fundo=fundo.toUpperCase();}
 
     const cotas =
     Number(document.getElementById("cotas").value);
@@ -25,6 +50,7 @@ function salvarAporte(){
         return;
     }
 
+    if(!fundosCadastrados.includes(fundo)){fundosCadastrados.push(fundo);localStorage.setItem("fundosCadastrados",JSON.stringify(fundosCadastrados));preencherSelect("fundo");preencherSelect("fundoRendimento");}
     aportes.push({
         fundo,
         cotas,
@@ -46,9 +72,9 @@ function salvarAporte(){
 
 function salvarRendimento(){
 
-    const fundo =
-    document.getElementById("fundoRendimento")
-    .value.toUpperCase();
+    let fundo=document.getElementById("fundoRendimento").value;
+if(fundo==="__NOVO__"){fundo=document.getElementById("novoFundoRendimento").value.toUpperCase();}
+else{fundo=fundo.toUpperCase();}
 
     const mes =
     document.getElementById("mes").value;
@@ -65,6 +91,7 @@ function salvarRendimento(){
         return;
     }
 
+    if(!fundosCadastrados.includes(fundo)){fundosCadastrados.push(fundo);localStorage.setItem("fundosCadastrados",JSON.stringify(fundosCadastrados));}
     rendimentos.push({
         fundo,
         mes,
