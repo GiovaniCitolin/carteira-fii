@@ -1,39 +1,30 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Carteira FII v2</title>
-<link rel="stylesheet" href="css/style.css">
-</head>
+<!DOCTYPE html><html lang='pt-BR'><head>
+<meta charset='UTF-8'><meta name='viewport' content='width=device-width,initial-scale=1'>
+<link rel='stylesheet' href='css/style.css'><title>Carteira FII V2.1 Sprint2</title></head>
 <body>
-<header class="topo">
-<h1>Carteira FII</h1>
-<p>Layout V2 inspirado em apps financeiros</p>
-</header>
+<header class='topo'><h1>Carteira FII</h1><button class='avatar'>👤</button></header>
 
-<div class="container">
-<div class="dashboard">
-<div><small>Total Investido</small><h2 id="totalInvestido">R$ 0,00</h2></div>
-<div><small>Dividendos</small><h2 id="totalRendimentos">R$ 0,00</h2></div>
+<section class='dashboard'>
+<div class='box'><small>Investido</small><h2 id='totalInvestido'>R$ 0,00</h2></div>
+<div class='box'><small>Dividendos</small><h2 id='totalRendimentos'>R$ 0,00</h2></div>
+</section>
+
+<input class='search' placeholder='🔍 Pesquisar fundo...'>
+
+<div class='card'>
+<div class='head'><b>HGLG11</b><button class='menu'>⋮</button></div>
+<p>57 cotas</p>
+<p>Investido: R$ 9.850,00</p>
+<div class='actions'>
+<button>✏️ Editar</button>
+<button class='danger'>🗑 Excluir</button>
+</div>
 </div>
 
-<div class="search-box">
-<input id="pesquisa" placeholder="🔍 Pesquisar fundo">
-</div>
+<button class='fab'>+</button>
 
-<div class="card" id="listaFundos">
-<p>Os cards dos fundos aparecerão aqui.</p>
-</div>
-
-<button id="fab">+</button>
-
-<nav class="bottom-nav">
-<button>🏠<br>Início</button>
-<button>📊<br>Histórico</button>
-<button>⚙️<br>Config.</button>
+<nav class='bottom'>
+<button>🏠</button><button>📊</button><button>➕</button><button>⚙️</button>
 </nav>
-</div>
-<script src="js/app.js"></script>
-</body>
-</html>
+<script src='js/app.js'></script>
+</body></html>
