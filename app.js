@@ -490,3 +490,41 @@ function excluirRendimento(i){
 /* ========================= */
 
 atualizarResumo();
+
+
+function editarFundo(i){
+
+    const a = aportes[i];
+
+    const fundo = prompt("Fundo", a.fundo);
+    if(fundo === null) return;
+
+    const cotas = prompt("Quantidade de cotas", a.cotas);
+    if(cotas === null) return;
+
+    const valor = prompt("Preço da cota", a.valor);
+    if(valor === null) return;
+
+    const data = prompt("Data (AAAA-MM-DD)", a.data || "");
+    if(data === null) return;
+
+    aportes[i] = {
+        fundo: fundo.toUpperCase(),
+        cotas: Number(cotas),
+        valor: Number(valor),
+        data: data
+    };
+
+    localStorage.setItem("aportes", JSON.stringify(aportes));
+    location.reload();
+}
+
+function excluirFundo(i){
+
+    if(!confirm("Deseja excluir este aporte?")) return;
+
+    aportes.splice(i,1);
+
+    localStorage.setItem("aportes", JSON.stringify(aportes));
+    location.reload();
+}
