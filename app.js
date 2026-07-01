@@ -1,3 +1,4 @@
+
 let fundosCadastrados=JSON.parse(localStorage.getItem("fundosCadastrados"))||[];
 
 function preencherSelect(id){
@@ -567,53 +568,3 @@ async function atualizarCotacaoFII(ticker) {
     }
 
 }
-
-/* =========================
-   ATUALIZAR IVVB11 (BOTÃO)
-========================= */
-
-async function atualizarIVVB11() {
-
-    try {
-
-        const resposta = await fetch(
-            "https://query1.finance.yahoo.com/v8/finance/chart/IVVB11.SA"
-        );
-
-        const dados = await resposta.json();
-
-        const preco =
-            dados.chart.result[0].meta.regularMarketPrice;
-
-        if (!preco) {
-            alert("Não foi possível obter a cotação.");
-            return;
-        }
-
-        aportes.forEach(aporte => {
-
-            if (
-                aporte.fundo &&
-                aporte.fundo.toUpperCase() === "IVVB11"
-            ) {
-                aporte.valor = Number(preco);
-            }
-
-        });
-
-        localStorage.setItem(
-            "aportes",
-            JSON.stringify(aportes)
-        );
-
-        alert("IVVB11 atualizado com sucesso!");
-        location.reload();
-
-    } catch (erro) {
-        alert("Erro ao atualizar o IVVB11.");
-    }
-
-}
-window.addEventListener("load", () => {
-    atualizarIVVB11();
-});
