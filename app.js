@@ -22,7 +22,69 @@ function preencherSelect(id){
    if(id==="fundo" && this.value!=="__NOVO__"){
       atualizarCotacaoFII(this.value);
    }
+/* =========================
+   ATUALIZAÇÃO AUTOMÁTICA IVVB11
+========================= */
 
+async function atualizarIVVB11Automatico() {
+
+    try {
+
+        const resposta = await fetch(
+            "https://query1.finance.yahoo.com/v8/finance/chart/IVVB11.SA"
+        );
+
+        const dados = await resposta.json();
+
+        const preco =
+            dados.chart.result[0].meta.regularMarketPrice;
+
+        if (!preco) return;
+
+        let alterou = false;
+
+        aportes.forEach(a => {
+
+            if (a.fundo &&
+                a.fundo.toUpperCase() === "IVVB11") {
+
+                a.valor = Number(preco).toFixed(2);
+                alterou = true;
+            }
+
+        });
+
+        if (alterou) {
+
+            localStorage.setItem(
+                "aportes",
+                JSON.stringify(aportes)
+            );
+
+            console.log(
+                "IVVB11 atualizado para R$ " +
+                Number(preco).toFixed(2)
+            );
+
+        }
+
+    } catch (erro) {
+
+        console.log(
+            "Erro ao atualizar IVVB11."
+        );
+
+    }
+
+}
+
+/* Atualiza automaticamente ao abrir o aplicativo */
+
+window.addEventListener("load", () => {
+
+    atualizarIVVB11Automatico();
+
+});
 };
 }
 function inicializarFundos(){
