@@ -10,9 +10,20 @@ function preencherSelect(id){
  });
  s.innerHTML+='<option value="__NOVO__">➕ Novo FII...</option>';
  s.onchange=function(){
-   const campo=document.getElementById(id==="fundo"?"novoFundo":"novoFundoRendimento");
-   campo.style.display=this.value==="__NOVO__"?"block":"none";
- };
+
+   const campo=document.getElementById(
+      id==="fundo" ? "novoFundo" : "novoFundoRendimento"
+   );
+
+   campo.style.display=this.value==="__NOVO__"
+      ? "block"
+      : "none";
+
+   if(id==="fundo" && this.value!=="__NOVO__"){
+      atualizarCotacaoFII(this.value);
+   }
+
+};
 }
 function inicializarFundos(){
  aportes.forEach(a=>{
@@ -527,4 +538,33 @@ function excluirFundo(i){
 
     localStorage.setItem("aportes", JSON.stringify(aportes));
     location.reload();
+}
+/* =========================
+   COTAÇÃO AUTOMÁTICA
+========================= */
+
+async function atualizarCotacaoFII(ticker) {
+
+    if (!ticker || ticker === "__NOVO__") return;
+
+    try {
+
+        const resposta = await fetch(
+            `https://query1.finance.yahoo.com/v8/finance/chart/${ticker}.SA`
+        );
+
+        const dados = await resposta.json();
+
+        const preco =
+            dados.chart.result[0].meta.regularMarketPrice;
+
+        if (preco) {
+            document.getElementById("valor").value =
+                Number(preco).toFixed(2);
+        }
+
+    } catch (erro) {
+        console.log("Não foi possível atualizar a cotação.");
+    }
+
 }
