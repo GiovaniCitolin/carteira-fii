@@ -20,8 +20,45 @@ function preencherSelect(id){
       : "none";
 
    if(id==="fundo" && this.value!=="__NOVO__"){
-      atualizarCotacaoFII(this.value);
-   }
+      /* =========================
+   COTAÇÃO AUTOMÁTICA (BRAPI)
+========================= */
+
+async function atualizarCotacaoFII(ticker) {
+
+    if (!ticker || ticker === "__NOVO__") return;
+
+    try {
+
+        const resposta = await fetch(
+            `https://brapi.dev/api/quote/${ticker}`
+        );
+
+        const dados = await resposta.json();
+
+        if (
+            dados.results &&
+            dados.results.length > 0
+        ) {
+
+            const preco = dados.results[0].regularMarketPrice;
+
+            if (preco) {
+
+                document.getElementById("valor").value =
+                    Number(preco).toFixed(2);
+
+            }
+
+        }
+
+    } catch (erro) {
+
+        console.log("Erro ao atualizar cotação.");
+
+    }
+
+}
 
 };
 }
@@ -568,3 +605,69 @@ async function atualizarCotacaoFII(ticker) {
     }
 
 }
+/* =========================
+   ATUALIZAÇÃO AUTOMÁTICA DO IVVB11
+========================= */
+
+async function atualizarIVVB11() {
+
+    try {
+
+        const resposta = await fetch(
+            "https://brapi.dev/api/quote/IVVB11"
+        );
+
+        const dados = await resposta.json();
+
+        if (
+            !dados.results ||
+            dados.results.length === 0
+        ) return;
+
+        const preco =
+            Number(dados.results[0].regularMarketPrice);
+
+        let alterou = false;
+
+        aportes.forEach(aporte => {
+
+            if (
+                aporte.fundo &&
+                aporte.fundo.toUpperCase() === "IVVB11"
+            ) {
+
+                aporte.valor = preco;
+
+                alterou = true;
+
+            }
+
+        });
+
+        if (alterou) {
+
+            localStorage.setItem(
+                "aportes",
+                JSON.stringify(aportes)
+            );
+
+            console.log(
+                "IVVB11 atualizado: R$ " +
+                preco.toFixed(2)
+            );
+
+        }
+
+    } catch (e) {
+
+        console.log("Erro ao atualizar IVVB11");
+
+    }
+
+}
+
+window.addEventListener("load", () => {
+
+    atualizarIVVB11();
+
+});
